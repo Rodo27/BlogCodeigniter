@@ -149,6 +149,7 @@
 				$this->form_validation->set_rules('content', 'content', 'required|min_length[10]');
 				$this->form_validation->set_rules('description', 'description', 'max_length[100]');
 				$this->form_validation->set_rules('posted', 'posted', 'required');
+				$this->form_validation->set_rules('category_id', 'category', 'required');
 
 				$data['title'] = $this->input->post('title'); 
 				$data['content'] = $this->input->post('content');
@@ -183,8 +184,17 @@
 					redirect("admin/post_save/$post_id");
 
 				}else{
-					//echo validation_errors();
+					echo validation_errors();
+					/*
 					echo '';
+					errors = validation_errors();
+		       		$message = array(
+		        	            'status' => FALSE,
+		        	            'message' => $errors
+		        	);
+		        	$this->response($message, REST_Controller::HTTP_NOT_ACCEPTABLE);
+    				return;
+    				*/
 				}
 			}
 
@@ -247,12 +257,13 @@
 					echo json_encode(array("filename" =>$title, "uploaded" => 1, "url" => "/". PROJECT_FOLDER . "/files/post/" . $title));
 				}
 				$this->resize_image($data["full_path"]);
-			}else{
-				$error = array('error' => $this->upload->display_errors());
-
+			}else if (!empty($_FILES[$image]['name'])){
+				//$error = array('error' => $this->upload->display_errors());
                 //$this->load->view('upload_form', $error);
+                //var_dump($error);
 
-                var_dump($error);
+                $this->session->set_flashdata('text', $this->upload->display_error());
+                $this->session->set_flashdata('type', 'error');
 			}
 
 		}
@@ -395,6 +406,7 @@
 
 		// VALIDATION
 
+		/* This function is defined by global in MyController
 		function validate_passwd($pass){
 
 			// At least one digit required
@@ -417,6 +429,6 @@
 			}		
 
 			return FALSE;	 
-		}
+		}*/
 
 	}

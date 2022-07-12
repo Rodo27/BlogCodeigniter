@@ -9,5 +9,17 @@
                 <a href="#" class="nav-link"></a>
             </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('app/profile') ?>" role="button">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </li>
+            <li class="user-panel">
+                <img src="<?php echo image_user_helper($this->session->userdata("id")) ?>" class="img-circle" alt="User Image">
+            </li>
+            
+        </ul>
+
     </nav>
 <!-- /.navbar -->

@@ -87,7 +87,8 @@
                 $('#on-hold-message').show()
                 alert('You have exceeded the maximum number of login attempts.')
               }else{
-                alert('Failed login attempt ' + response.count + ' of ' + $('#max_allowed_attempts').val())
+                alert("Intente nuevamente, accesos incorrectos.");
+                //alert('Failed login attempt ' + response.count + ' of ' + $('#max_allowed_attempts').val())
               }
             }
           })

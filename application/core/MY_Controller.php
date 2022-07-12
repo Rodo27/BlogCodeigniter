@@ -41,6 +41,36 @@ class MY_Controller extends Auth_Controller
             )
         );
     }
+
+    function validate_passwd($pass){
+
+        // At least one digit required
+        $regex = '(?=.*\d)';
+
+        // At least one lower case letter required
+        $regex .= '(?=.*[a-z])';
+
+        // At least one upper case letter required
+        $regex .= '(?=.*[A-Z])';
+
+        // No space, tab or other whitespace chars allowed
+        $regex .= '(?!.*\s)';
+
+        //No backslash, apostrophe or quote chars are allowed
+        $regex .= '(?!.*[\\\\\'"])';
+
+        if(preg_match('/^' . $regex . '.*$/', $pass)){
+            return TRUE;
+        }       
+
+        return FALSE;    
+    }
+
+    function validate_same_passwd($password){
+        $user = $this->User->find($this->session->userdata('id'));
+
+        return $this->authentication->check_passwd($user->passwd, $password);
+    }
 }
 
 /* End of file MY_Controller.php */

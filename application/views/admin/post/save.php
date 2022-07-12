@@ -1,7 +1,7 @@
 <?php echo form_open_multipart('','class="my_form"') ?>
 	<div class="form-group">
 		<?php echo form_label('Title','title') ?>
-		<?php $text_input = array('name' => 'title','id' => 'title','value' => $title,'class' => 'form-control input-lg',); 
+		<?php $text_input = array('name' => 'title','id' => 'title','value' => $title, 'minlength' => 10,'maxlength' => 65, 'class' => 'form-control input-lg', 'required' => 'required'); 
 			echo form_input($text_input);?>
 		<?php echo form_error('title', '<div class="text-danger">','</div>') ?>
 	</div>   
@@ -27,10 +27,13 @@
 		<?php echo form_label('Image','image') ?>
 		<?php $text_input = array('name' => 'upload','id' => 'upload','value' => '','class' => 'form-control input-lg', 'type' => 'file'); 
 			echo form_input($text_input);?>
+		
 		<?php echo 
-            $image != "" ? 
-            '<img class="img-post img-thumbnail img-presentation-small" src="' . base_url('files/post/') . $image . '">' :
-            ''
+		    $image != "" ? 
+		    '<a class="test-popup-link" href="' . base_url('files/post/') . $image . '" >
+		        <img class="img-post img-thumbnail img-presentation-small" src="' . base_url('files/post/') . $image . '">
+		    </a>' :
+		    ''
         ?>
 		<?php echo form_error('image', '<div class="text-danger">','</div>') ?>
 	</div>
